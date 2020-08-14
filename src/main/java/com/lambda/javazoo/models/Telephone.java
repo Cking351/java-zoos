@@ -1,22 +1,34 @@
 package com.lambda.javazoo.models;
 
-public class Telephone {
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "telephone")
+public class Telephone extends Auditable{
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private long phoneid;
 
     private String phonetype;
 
     private String phonenumber;
 
+    @ManyToOne
+    @JoinColumn(name = "zooid", nullable = false)
+    @JsonIgnoreProperties(value = "telephones", allowSetters = true)
     private Zoo zoo;
 
     public Telephone() {
     }
 
-    public Telephone(long phoneid, String phonetype, String phonenumber) {
+    public Telephone(long phoneid, String phonetype, String phonenumber, Zoo zoo) {
         this.phoneid = phoneid;
         this.phonetype = phonetype;
         this.phonenumber = phonenumber;
+        this.zoo = zoo;
     }
 
     public long getPhoneid() {
