@@ -22,6 +22,10 @@ public class Zoo extends Auditable{
     @JsonIgnoreProperties(value = "zoo", allowSetters = true)
     private List<Telephone>telephones = new ArrayList<>();
 
+    @OneToMany(mappedBy = "zoo", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnoreProperties(value = "zoo", allowSetters = true)
+    private Set<ZooAnimal> zooAnimals = new HashSet<>();
+
 
     public Zoo() {
     }
@@ -56,15 +60,11 @@ public class Zoo extends Auditable{
         this.telephones = telephones;
     }
 
-    @OneToMany(mappedBy = "zoo", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonIgnoreProperties(value = "zoo", allowSetters = true)
-    private Set<ZooAnimal> getZooAnimals = new HashSet<>();
-
-    public Set<ZooAnimal> getGetZooAnimals() {
-        return getZooAnimals;
+    public Set<ZooAnimal> getZooAnimals() {
+        return zooAnimals;
     }
 
-    public void setGetZooAnimals(Set<ZooAnimal> getZooAnimals) {
-        this.getZooAnimals = getZooAnimals;
+    public void setZooAnimals(Set<ZooAnimal> zooAnimals) {
+        this.zooAnimals = zooAnimals;
     }
 }

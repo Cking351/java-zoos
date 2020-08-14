@@ -13,13 +13,13 @@ public class ZooAnimal extends Auditable implements Serializable {
     @Id
     @ManyToOne
     @JoinColumn(name = "zooid")
-    @JsonIgnoreProperties(value = "animals", allowSetters = true)
+    @JsonIgnoreProperties(value = "zooanimals", allowSetters = true)
     private Zoo zoo;
 
     @Id
     @ManyToOne
     @JoinColumn(name = "animalid")
-    @JsonIgnoreProperties(value = "zoos", allowSetters = true)
+    @JsonIgnoreProperties(value = "zooanimals", allowSetters = true)
     private Animal animal;
 
     public ZooAnimal() {
@@ -31,19 +31,12 @@ public class ZooAnimal extends Auditable implements Serializable {
     }
 
     @Override
-    public boolean equals(Object o)
-    {
-        if (this == o)
-        {
-            return true;
-        }
-        if (!(o instanceof ZooAnimal))
-        {
-            return false;
-        }
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
         ZooAnimal that = (ZooAnimal) o;
-        return ((zoo == null) ? 0 : zoo.getZooid()) == ((that.zoo == null) ? 0 : that.zoo.getZooid()) &&
-                ((animal == null) ? 0 : animal.getAnimalid()) == ((that.animal == null) ? 0 : that.animal.getAnimalid());
+        return zoo.equals(that.zoo) &&
+                animal.equals(that.animal);
     }
 
 

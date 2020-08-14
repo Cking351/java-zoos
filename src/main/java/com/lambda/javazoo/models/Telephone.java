@@ -18,7 +18,7 @@ public class Telephone extends Auditable{
 
     @ManyToOne
     @JoinColumn(name = "zooid", nullable = false)
-    @JsonIgnoreProperties(value = "telephones", allowSetters = true)
+    @JsonIgnoreProperties(value = "telephone", allowSetters = true)
     private Zoo zoo;
 
     public Telephone() {
